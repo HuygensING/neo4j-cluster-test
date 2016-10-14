@@ -1,0 +1,6 @@
+logging:
+  level: INFO
+  loggers:
+    nl.knaw.huygens: DEBUG
+dbAccessFactory:
+  path: testdatabase

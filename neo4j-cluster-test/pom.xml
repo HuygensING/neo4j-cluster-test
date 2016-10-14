@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <prerequisites>
+    <maven>3.0.0</maven>
+  </prerequisites>
+
+  <groupId>nl.knaw.huygens</groupId>
+  <artifactId>neo4j-cluster-test</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Neo4jClusterTest</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <jdk.version>1.8</jdk.version>
+    <dropwizard.version>1.0.2</dropwizard.version>
+    <mainClass>nl.knaw.huygens.Neo4jClusterTestApplication</mainClass>
+    <appassembler.version>1.10</appassembler.version>
+    <maven-compiler.version>3.5.1</maven-compiler.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.dropwizard</groupId>
+        <artifactId>dropwizard-bom</artifactId>
+        <version>${dropwizard.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Drop wizard -->
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-core</artifactId>
+    </dependency>
+    <!-- Neo4j Enterprice Edition -->
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>neo4j-enterprise</artifactId>
+      <version>3.0.6</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler.version}</version>
+        <configuration>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>${appassembler.version}</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+            <configuration>
+              <programs>
+                <program>
+                  <id>test_cluster</id>
+                  <mainClass>${mainClass}</mainClass>
+                </program>
+              </programs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

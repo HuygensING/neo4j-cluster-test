@@ -1,0 +1,13 @@
+/build
+/reports
+/target
+.classpath
+.settings
+.project
+
+# intellij files and folders
+*.iml
+.idea
+
+# test database
+testdatabase/
