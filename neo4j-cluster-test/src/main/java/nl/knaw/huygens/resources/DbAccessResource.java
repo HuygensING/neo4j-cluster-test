@@ -2,10 +2,12 @@ package nl.knaw.huygens.resources;
 
 import nl.knaw.huygens.db.DbAccess;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -37,7 +39,16 @@ public class DbAccessResource {
       return Response.status(404).entity("{\"message\":\"No Vertices with name '" + name + "' found\"}").build();
     }
 
-      return Response.ok(vertices).build();
-    }
-
+    return Response.ok(vertices).build();
   }
+
+  @GET
+  @Path("getAll")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getAll(@QueryParam("number") @DefaultValue("100") int numberOfVertices){
+    List<String> vertices = dbAccess.getAll(numberOfVertices);
+
+    return Response.ok(vertices).build();
+  }
+
+}

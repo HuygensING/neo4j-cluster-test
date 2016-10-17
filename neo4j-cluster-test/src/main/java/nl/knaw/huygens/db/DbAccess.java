@@ -8,4 +8,6 @@ public interface DbAccess {
   void createVertexWithName(String name);
 
   List<String> getVerticesByName(String name);
+
+  List<String> getAll(int numberOfVertices);
 }

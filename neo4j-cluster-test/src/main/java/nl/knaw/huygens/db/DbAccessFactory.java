@@ -112,13 +112,28 @@ public class DbAccessFactory {
         try (Transaction transaction = graphDatabaseService.beginTx()) {
           ResourceIterator<Node> nodes = graphDatabaseService.findNodes(LABEL, "name", name);
 
-          List<String> output =
-            nodes.stream().map(v -> v.getId() + " : " + v.getProperty("name")).collect(Collectors.toList());
+          List<String> output = format(nodes);
           transaction.success();
 
           return output;
         }
 
+      }
+
+      private List<String> format(ResourceIterator<Node> nodes) {
+        return nodes.stream().map(v -> v.getId() + " : " + v.getProperty("name")).collect(Collectors.toList());
+      }
+
+      @Override
+      public List<String> getAll(int numberOfVertices) {
+        try (Transaction transaction = graphDatabaseService.beginTx()) {
+          ResourceIterator<Node> nodes = graphDatabaseService.findNodes(LABEL);
+
+          List<String> output = format(nodes);
+          transaction.success();
+
+          return output;
+        }
       }
     };
   }
