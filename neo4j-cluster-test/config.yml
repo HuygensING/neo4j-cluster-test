@@ -4,7 +4,14 @@ logging:
     nl.knaw.huygens: DEBUG
 dbAccessFactory:
   path: /testdatabase
-  #NEO4J_dbms_mode: HA
+  db_mode: ${DB_MODE} # use "single" for a non-cluster db and "HA" for a highly availability cluster
+  server_id: ${SERVER_ID} # basically a number of the server should be unique in the cluster
+  server_name: ${SERVER_NAME}
+  coordination_port: ${COORD_PORT}
+  data_port: ${DATA_PORT}
+  init_hosts: ${INIT_HOSTS} # comma separated list with the server names with the coodination port numbers
+
+
   #NEO4J_ha_serverId: 4
   #NEO4J_ha_host_coordination: instance4:5001
   #NEO4J_ha_host_data: instance4:6001

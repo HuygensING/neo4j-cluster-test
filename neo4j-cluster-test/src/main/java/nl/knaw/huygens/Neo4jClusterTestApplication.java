@@ -1,6 +1,8 @@
 package nl.knaw.huygens;
 
 import io.dropwizard.Application;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import nl.knaw.huygens.db.DbAccessFactory;
@@ -19,7 +21,10 @@ public class Neo4jClusterTestApplication extends Application<Neo4jClusterTestCon
 
   @Override
   public void initialize(final Bootstrap<Neo4jClusterTestConfiguration> bootstrap) {
-    // TODO: application initialization
+    bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
+      bootstrap.getConfigurationSourceProvider(),
+      new EnvironmentVariableSubstitutor(false)
+    ));
   }
 
   @Override
