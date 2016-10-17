@@ -80,6 +80,7 @@ public class DbAccessFactory {
         .setConfig(ClusterSettings.cluster_name, serverName)
         .setConfig(ClusterSettings.initial_hosts, initialHosts)
         .setConfig(HaSettings.ha_server, String.format("%s:%s", serverName, dataPort))
+        // add a pull interval to make sure the data is stored before it is pulled
         .setConfig(HaSettings.pull_interval, "5ms")
         .newGraphDatabase();
     } else {
