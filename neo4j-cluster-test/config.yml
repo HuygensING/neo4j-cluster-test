@@ -9,4 +9,4 @@ dbAccessFactory:
   server_name: ${SERVER_NAME}
   coordination_port: ${COORD_PORT}
   data_port: ${DATA_PORT}
-  init_hosts: ${INIT_HOSTS} # comma separated list with the server names with the coodination port numbers
+  init_hosts: ${INIT_HOSTS} # comma separated list with the server names with the coordination port numbers, only one running host has to be configured

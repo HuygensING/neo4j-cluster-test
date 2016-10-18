@@ -80,7 +80,11 @@ public class DbAccessFactory {
         .setConfig(ClusterSettings.cluster_name, serverName)
         .setConfig(ClusterSettings.initial_hosts, initialHosts)
         .setConfig(HaSettings.ha_server, String.format("%s:%s", serverName, dataPort))
-        // add a pull interval to make sure the data is stored before it is pulled
+        /*
+         * Neo4j synchronizes the slave databases via pulls of the master data. By default this property is not
+         * activated (set to 0s). So this property has to be set. A less save way to duplicate data is via
+         * 'ha.tx_push_factor'. This option is basically for duplicate the data before the data is pulled.
+         */
         .setConfig(HaSettings.pull_interval, "5ms")
         .newGraphDatabase();
     } else {
