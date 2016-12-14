@@ -10,4 +10,4 @@ Both parts of this repository use docker make sure you have installed this on yo
 For more information: https://www.docker.com/products/overview
 
 ## Links
-* http://neo4j.com/docs/stable/ha-configuration.html
+* http://neo4j.com/docs/2.3.1/ha-configuration.html
